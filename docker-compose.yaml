@@ -1,0 +1,21 @@
+services:
+  app:
+    container_name: dip_1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8090:8090
+    entrypoint: sh -c "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8090 --reload --log-level debug --proxy-headers"
+    networks:
+      - education
+    volumes:
+      - ./:/app
+
+volumes:
+  static:
+  
+networks:
+  education:
+    driver: bridge
+    external: true

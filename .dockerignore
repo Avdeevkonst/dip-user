@@ -1,0 +1,6 @@
+.git/
+.gitigonre
+.gitlab-ci.yml
+Dockerfile
+docker-compose*
+README.md
