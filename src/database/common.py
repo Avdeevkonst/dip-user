@@ -32,7 +32,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.pool import NullPool
 
-from src.config.config import settings
+from src.config import settings
 from src.user.models import Base
 
 M = TypeVar("M", bound=Base)

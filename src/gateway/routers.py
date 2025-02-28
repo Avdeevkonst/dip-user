@@ -3,9 +3,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 
 services = {
-    "service1": "https://0.0.0.0:8001",
-    "service2": "https://0.0.0.0:8002",
-    # Add more services if needed
+    "analitycs": "https://0.0.0.0:8091",
 }
 
 gate = APIRouter()

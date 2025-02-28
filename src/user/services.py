@@ -1,4 +1,4 @@
-from src.config.config import settings
+from src.config import settings
 from src.database.common import PgUnitOfWork
 from src.schemas import SignUp
 from src.user.cruds import UserCrud
