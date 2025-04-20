@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import HTTPException
 
-from src.database.common import CrudEntity, PgUnitOfWork
 from src.schemas import CreateUser, GetUser, UpdateUser
+from src.services.common import CrudEntity, PgUnitOfWork
 from src.user.models import User
 
 
