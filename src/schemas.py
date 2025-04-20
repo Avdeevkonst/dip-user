@@ -35,3 +35,14 @@ class GetUser(FromAttr):
 
 class UpdateUser(FromAttr):
     hashed_password: str = Field(min_length=8)
+
+
+class CarBase(FromAttr):
+    plate_number: str
+    model: str
+    avarage_speed: int
+    latitude: float
+    longitude: float
+
+
+class CarCreate(CarBase): ...
