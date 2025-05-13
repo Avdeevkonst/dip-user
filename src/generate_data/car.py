@@ -1,13 +1,17 @@
+import asyncio
 import random
 
-from src.main import broker
 from src.schemas import CarCreate
+from src.services.kafka import broker
 from src.utils import Topics
 
+max_cars = 50
 
-@broker.publisher(topic=Topics.CAR.value)
+
 async def publish():
-    pass
+    for _ in range(max_cars):
+        await broker.publish(generate_car_payload(), topic=Topics.CAR.value)
+        await asyncio.sleep(1)
 
 
 """

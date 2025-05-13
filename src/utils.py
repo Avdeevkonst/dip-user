@@ -7,6 +7,25 @@ from fastapi import HTTPException, status
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 
 
+class Weather(str, Enum):
+    """Weather status enum."""
+
+    DRY = "DRY"
+    WET = "WET"
+    SNOWY = "SNOWY"
+    CLOUDY = "CLOUDY"
+    ICY = "ICY"
+    MUDDY = "MUDDY"
+
+
+class Jam(str, Enum):
+    """Traffic jam status enum."""
+
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+
+
 class UserRole(Enum):
     STUDENT = "student"
     INSTRUCTOR = "instructor"
@@ -31,7 +50,11 @@ def handle_error(
     exc_tb: TracebackType | None,
 ):
     if exc_type is not None and exc_val is not None:
-        st_ = status.HTTP_404_NOT_FOUND if exc_type is NoResultFound else status.HTTP_400_BAD_REQUEST
+        st_ = (
+            status.HTTP_404_NOT_FOUND
+            if exc_type is NoResultFound
+            else status.HTTP_400_BAD_REQUEST
+        )
         handle_error_message(exc_val.args[0], st_)
 
 
