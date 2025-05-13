@@ -2,7 +2,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from src.utils import UserRole
+from src.utils import Jam, UserRole, Weather
 
 
 class FromAttr(BaseModel):
@@ -37,12 +37,28 @@ class UpdateUser(FromAttr):
     hashed_password: str = Field(min_length=8)
 
 
-class CarBase(FromAttr):
-    plate_number: str
-    model: str
-    avarage_speed: int
-    latitude: float
-    longitude: float
+class CarCreate(BaseModel):
+    """Raw car data from traffic sensors."""
+
+    plate_number: str = Field(..., description="Car plate number")
+    road_id: UUID
+    model: str = Field(..., description="Car model")
+    average_speed: int = Field(..., ge=0, description="Current speed from sensor")
 
 
-class CarCreate(CarBase): ...
+class RoadConditionCreate(FromAttr):
+    road_id: UUID
+    weather_status: Weather
+    jam_status: Jam
+    name: str = Field(..., min_length=1, max_length=100)
+    description: str = Field(..., min_length=1, max_length=400)
+
+
+class RoadCreate(FromAttr):
+    start: str = Field(..., min_length=1, max_length=255)
+    end: str = Field(..., min_length=1, max_length=255)
+    length: float
+    city: str = Field(..., min_length=1, max_length=255)
+    name: str = Field(..., min_length=1, max_length=100)
+    street: str = Field(..., min_length=1, max_length=255)
+    description: str = Field(..., min_length=1, max_length=400)
